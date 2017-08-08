@@ -49,10 +49,15 @@ class Content extends Component {
         });
     }
     addTask() {
-        console.log('onAddTask', this.props.task_count);
         let titleInput = document.getElementById("addNameTaskField");
         let descriptionInput = document.getElementById("addDescriptionTaskField");
-        this.props.onAddTask(this.props.tasks_length.length,titleInput.value, descriptionInput.value,this.props.active_project);
+        let d = new Date();
+        let curr_date = ('0' + (d.getDate())).slice(-2);
+        let curr_month = ('0' + (d.getMonth() + 1)).slice(-2);
+        let curr_year = d.getFullYear();
+
+        let formatDate = curr_date + "-" + curr_month + "-" + curr_year;
+        this.props.onAddTask(this.props.tasks_length.length,titleInput.value, descriptionInput.value,this.props.active_project,formatDate);
         this.setState({
             open: !this.state.open,
             task_count: this.props.task_count + 1,
@@ -65,15 +70,16 @@ class Content extends Component {
     editTask() {
         let titleInput = document.getElementById("editNameTaskField");
         let descriptionInput = document.getElementById("editDescriptionTaskField");
-        this.props.onEditTask(this.props.active_project, titleInput.value, descriptionInput.value);
+        this.props.onEditTask(this.props.active_task, titleInput.value, descriptionInput.value);
         this.setState({
             open: !this.state.open,
             field_value: ""
         });
     }
     deleteTask() {
-        this.props.onDeleteTask(this.props.active_project);
+        this.props.onDeleteTask(this.props.active_task);
         this.setState({
+            open: !this.state.open,
             openModal: !this.state.openModal
         });
     }
@@ -96,6 +102,7 @@ class Content extends Component {
         });
     }
     render() {
+        console.log('tasks list',this.props.tasks);
         return (
 
             <div className="content">
@@ -146,8 +153,8 @@ export default connect(
         onFetchTasks: () => {
             dispatch(fetchTasks());
         },
-        onAddTask: (id,title,description,project_id) => {
-            dispatch(addTask(id,title,description,project_id));
+        onAddTask: (id,title,description,project_id,date) => {
+            dispatch(addTask(id,title,description,project_id,date));
         },
         onEditTask: (id,title,description) => {
             dispatch(editTask(id,title,description));

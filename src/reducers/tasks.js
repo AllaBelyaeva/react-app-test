@@ -6,15 +6,17 @@ const initialState = {
 
 export default function  tasks (state = initialState, action) {
     if (action.type === 'FETCH_TASKS') {
-        return { ...state, tasksList: action.payload, active_task: action.payload[0].id};
+        // console.log('try to sort tasks', action.payload);
+        return { ...state, tasksList: action.payload.sort((a,b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()), active_task: action.payload[0].id};
     }
     else if (action.type === 'ADD_TASK') {
+        const newTaskList = [
+            ...state.tasksList,
+            action.payload
+        ];
         return {
             ...state,
-            tasksList: [
-                ...state.tasksList,
-                action.payload
-            ]
+            tasksList: newTaskList.sort((a,b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
         };
     }
 
@@ -36,15 +38,18 @@ export default function  tasks (state = initialState, action) {
         }
     }
     else if (action.type === 'DELETE_TASK') {
+        console.log('Try to delete task reducer ----', action.payload.id);
         return {
             ...state,
             tasksList: state.tasksList.map(
                 (task, id) => task.id === action.payload.id ? {...task !== action.payload}
                     : task
-            )
+            ),
+            active_task: state.tasksList[0].id
         }
     }
     else if (action.type === 'COMPLETE_TASK') {
+        console.log('Try to delete task reducer ----', action.payload.id);
         return {
             ...state,
             tasksList: state.tasksList.map(

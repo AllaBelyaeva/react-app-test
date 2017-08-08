@@ -20,6 +20,15 @@ const textFieldStyleFocused = {
     borderColor: "#6b6b99",
 };
 
+const defaultValue = function (arr,props,value) {
+    for(let i=0; i<arr.length; i++){
+        if(arr[i].id === props){
+            return arr[i][value]
+        }
+    }
+};
+
+
 function DrawerRight(props) {
     return (
         <Drawer
@@ -66,6 +75,7 @@ function DrawerRight(props) {
                             <div className="edit-project-content">
                                 <TextField
                                     floatingLabelText="Project name"
+                                    defaultValue={defaultValue(props.projects,props.active_project, "title")}
                                     multiLine={true}
                                     rows={1}
                                     className="drawer-field"
@@ -153,6 +163,7 @@ function DrawerRight(props) {
                             </span>
                             <TextField
                                 floatingLabelText="Task name"
+                                defaultValue={defaultValue(props.tasks,props.active_task, "title")}
                                 multiLine={true}
                                 rows={1}
                                 className="drawer-field"
@@ -166,6 +177,7 @@ function DrawerRight(props) {
                             />
                             <TextField
                                 floatingLabelText="Description"
+                                defaultValue={defaultValue(props.tasks,props.active_task, "description")}
                                 multiLine={true}
                                 rows={1}
                                 className="drawer-field"

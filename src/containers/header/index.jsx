@@ -90,6 +90,8 @@ class Header extends Component {
                     onClose={ () => this.handleToggle() }
                     onValidateButton={ (event, value) => this.validateButton(event, value) }
                     disabledButton={this.state.field_value}
+                    projects={this.props.projects}
+                    active_project={this.props.active_project}
                 />
 
                 <ModalDialog
