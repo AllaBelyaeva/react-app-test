@@ -72,8 +72,7 @@ class Content extends Component {
         let descriptionInput = document.getElementById("editDescriptionTaskField");
         this.props.onEditTask(this.props.active_task, titleInput.value, descriptionInput.value);
         this.setState({
-            open: !this.state.open,
-            field_value: ""
+            open: !this.state.open
         });
     }
     deleteTask() {

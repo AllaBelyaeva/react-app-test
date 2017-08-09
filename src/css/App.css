@@ -12,6 +12,7 @@
   top:0;
   bottom: 0;
   width: 100%;
+  min-width: 1050px;
 }
 .sidebar {
   max-height: 100%;
@@ -133,7 +134,7 @@
 .command-content {
   float: left;
   line-height: 40px;
-  max-width: 500px;
+  width: 500px;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;

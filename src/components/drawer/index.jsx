@@ -90,7 +90,6 @@ function DrawerRight(props) {
                                 <IconButton
                                     children={<ContentDone />}
                                     onClick={props.callAction}
-                                    disabled={props.disabledButton === ""}
                                 />
                             </div>
                         </div>) :
@@ -192,7 +191,6 @@ function DrawerRight(props) {
                         <IconButton
                             children={<ContentDone />}
                             onClick={props.callActionEdit}
-                            disabled={props.disabledButton === ""}
                         />
                     </div>) :
                     null
